@@ -10,11 +10,6 @@ const entry = (await getEntry(
 )) as CollectionEntry<"pricing">;
 const { title, description, plans, call_to_action } = entry.data;
 
-const { isLoggedIn } = Astro.locals;
-
-if (!isLoggedIn) {
-  return Astro.redirect("/login");
-}
 ---
 
 <Base title={title} description={description}>

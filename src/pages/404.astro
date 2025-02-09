@@ -1,13 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 
-
-const { isLoggedIn } = Astro.locals;
-
-if (!isLoggedIn) {
-  return Astro.redirect("/login");
-}
-
 ---
 
 <Base title={"Error 404"} description={"Page not found"}>

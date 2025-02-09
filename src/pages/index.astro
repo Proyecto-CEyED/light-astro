@@ -11,12 +11,6 @@ const homepage = (await getEntry(
   "-index"
 )) as CollectionEntry<"homepage">;
 const { banner, feature, services, workflow, call_to_action } = homepage.data;
-
-const { isLoggedIn } = Astro.locals;
-
-if (!isLoggedIn) {
-  return Astro.redirect("/login");
-}
 ---
 
 <Base>
