@@ -100,7 +100,7 @@ const description = "Login to your account";
   </div>
 </BaseForForms>
 
-<script>
+<script type="module" is:inline>
   "astro:load";
 
   import { actions } from "astro:actions";
@@ -113,13 +113,13 @@ const description = "Login to your account";
   import { firebase } from "../firebase/config";
 
   document.addEventListener("astro:page-load", () => {
-    const $form = document.querySelector("#login-form") as HTMLFormElement;
+    const $form = document.querySelector("#login-form");
     const $btnGoogle = document.querySelector(
       "#btn-google"
-    ) as HTMLButtonElement;
+    );
     const $btnGithub = document.querySelector(
       "#btn-github"
-    ) as HTMLButtonElement;
+    );
 
     $form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -131,8 +131,8 @@ const description = "Login to your account";
       const passwordRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
       const emaliRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      const isValidEmail = (email as String).match(emaliRegex);
-      const isValidPassword = (password as String).match(passwordRegex);
+      const isValidEmail = (email).match(emaliRegex);
+      const isValidPassword = (password).match(passwordRegex);
 
       if (!isValidEmail) {
         showError(new Error("El correo electrónico no es válido"));
@@ -202,7 +202,7 @@ const description = "Login to your account";
     });
   });
 
-  const showError = (error: Error) => {
+  const showError = (error) => {
     Swal.fire({
       icon: "error",
       title: "Error",

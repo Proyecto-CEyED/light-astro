@@ -75,15 +75,15 @@ const description = "Login to your account";
   </div>
 </BaseForForms>
 
-<script>
+<script type="module" is:inline>
   import { actions } from "astro:actions";
   import Swal from "sweetalert2";
 
   document.addEventListener("astro:page-load", () => {
-    const $form = document.querySelector("#register-form") as HTMLFormElement;
+    const $form = document.querySelector("#register-form");
     const $btnSubmit = document.querySelector(
       "#btn-submit"
-    ) as HTMLButtonElement;
+    );
 
     $form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -98,11 +98,11 @@ const description = "Login to your account";
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
       const emaliRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-      const isValidEmail = (email as String).match(emaliRegex);
-      const isValidPassword = (password as String).match(passwordRegex);
-      const isValidName = (name as String).length > 3;
+      const isValidEmail = (email).match(emaliRegex);
+      const isValidPassword = (password).match(passwordRegex);
+      const isValidName = (name).length > 3;
       const isValidConfirmPassword =
-        (confirmPassword as String) == (password as String);
+        (confirmPassword) == (password);
 
       if (!isValidEmail) {
         showError(new Error("El correo electrónico no es válido"));
@@ -149,7 +149,7 @@ const description = "Login to your account";
     });
   });
 
-  const showError = (error: Error) => {
+  const showError = (error) => {
     Swal.fire({
       icon: "error",
       title: "Error",
@@ -157,5 +157,3 @@ const description = "Login to your account";
     });
   };
 </script>
-
-<!-- jugar2017@CJ -->
