@@ -127,7 +127,7 @@ const { main }: { main: NavigationLink[] } = menu;
 </header>
 
 <script>
-  "astro:page-load";
+  "astro:load";
   import { actions } from "astro:actions";
 
   document.addEventListener("astro:page-load", () => {
@@ -136,6 +136,7 @@ const { main }: { main: NavigationLink[] } = menu;
     ) as HTMLAnchorElement;
 
     $logoutButton.addEventListener("click", async () => {
+      $logoutButton.innerText = "Cerrando sesión...";
       await actions.logout();
       window.location.replace("/login");
     });
