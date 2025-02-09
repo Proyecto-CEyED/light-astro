@@ -1,11 +1,5 @@
 ---
 import Base from "@/layouts/Base.astro";
-const { isLoggedIn } = Astro.locals;
-
-if (!isLoggedIn) {
-  return Astro.redirect("/login");
-}
-
 
 ---
 
