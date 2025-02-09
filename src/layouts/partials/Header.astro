@@ -102,7 +102,7 @@ const { main }: { main: NavigationLink[] } = menu;
         nav_button.enable && (
           <div class="block md:hidden">
             <a
-              class="btn btn-primary z-0 ml-auto py-[14px]"
+              class="btn btn-primary z-0 ml-auto py-[14px] logout"
               href={nav_button.link}
             >
               {nav_button.label}
@@ -115,8 +115,7 @@ const { main }: { main: NavigationLink[] } = menu;
       nav_button.enable && (
         <div class="order-1 ml-auto hidden items-center md:order-2 md:ml-0 md:flex md:min-w-[150px] lg:min-w-[200px]">
           <button
-            id="logout"
-            class="btn btn-primary z-0 ml-auto py-[14px] disabled:opacity-50"
+            class="btn btn-primary z-0 ml-auto py-[14px] disabled:opacity-50 logout"
           >
             {nav_button.label}
           </button>
@@ -131,14 +130,16 @@ const { main }: { main: NavigationLink[] } = menu;
   import { actions } from "astro:actions";
 
   document.addEventListener("astro:page-load", () => {
-    const $logoutButton = document.getElementById(
-      "logout"
-    ) as HTMLButtonElement;
-    $logoutButton.addEventListener("click", async () => {
-      $logoutButton.innerText = "Cerrando sesión...";
-      $logoutButton.disabled = true;
-      await actions.logout();
-      window.location.replace("/login");
+    const $$logoutButtons = document.querySelectorAll(".logout") as NodeListOf<HTMLButtonElement>;
+
+    $$logoutButtons.forEach(($logoutButton) => {
+      $logoutButton.addEventListener("click", async () => {
+        $logoutButton.innerText = "Cerrando sesión...";
+        $logoutButton.disabled = true;
+        await actions.logout();
+        window.location.replace("/login");
+      });
     });
+
   });
 </script>
