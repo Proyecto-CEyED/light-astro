@@ -7,7 +7,7 @@ import { getEntry, render } from "astro:content";
 const entry = (await getEntry("pages", "404")) as CollectionEntry<"pages">;
 const { Content } = await render(entry);
 
-export const prerender = true
+export const prerender = true;
 
 const firebaseUser = firebase.auth.currentUser;
 
