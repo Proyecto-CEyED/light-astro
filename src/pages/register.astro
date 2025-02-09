@@ -75,15 +75,16 @@ const description = "Login to your account";
   </div>
 </BaseForForms>
 
-<script type="module" is:inline>
+<script>
   import { actions } from "astro:actions";
+  //@ts-ignore
   import Swal from "sweetalert2";
 
   document.addEventListener("astro:page-load", () => {
-    const $form = document.querySelector("#register-form");
+    const $form = document.querySelector("#register-form") as HTMLFormElement;
     const $btnSubmit = document.querySelector(
       "#btn-submit"
-    );
+    ) as HTMLButtonElement;
 
     $form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -98,9 +99,9 @@ const description = "Login to your account";
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
       const emaliRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-      const isValidEmail = (email).match(emaliRegex);
-      const isValidPassword = (password).match(passwordRegex);
-      const isValidName = (name).length > 3;
+      const isValidEmail = (email as String).match(emaliRegex);
+      const isValidPassword = (password as String).match(passwordRegex);
+      const isValidName = (name as String).length > 3;
       const isValidConfirmPassword =
         (confirmPassword) == (password);
 
@@ -149,7 +150,7 @@ const description = "Login to your account";
     });
   });
 
-  const showError = (error) => {
+  const showError = (error: Error) => {
     Swal.fire({
       icon: "error",
       title: "Error",
