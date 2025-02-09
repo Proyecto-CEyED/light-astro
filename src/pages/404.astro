@@ -1,10 +1,21 @@
 ---
+import { firebase } from "@/firebase/config";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry, render } from "astro:content";
 const entry = (await getEntry("pages", "404")) as CollectionEntry<"pages">;
 const { Content } = await render(entry);
+
+const firebaseUser = firebase.auth.currentUser;
+
+const { isLoggedIn } = Astro.locals;
+
+if (!isLoggedIn) {
+  return Astro.redirect("/login");
+}
+
+await firebaseUser?.reload();
 ---
 
 <Base title={entry.data.title}>
