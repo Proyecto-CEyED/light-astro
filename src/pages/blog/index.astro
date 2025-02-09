@@ -16,6 +16,12 @@ const posts = await getSinglePage("blog");
 const sortedPosts = sortByDate(posts);
 const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPosts = sortedPosts.slice(0, config.settings.pagination);
+
+const { isLoggedIn } = Astro.locals;
+
+if (!isLoggedIn) {
+  return Astro.redirect("/login");
+}
 ---
 
 <Base title={postIndex?.data.title}>

@@ -6,6 +6,12 @@ import { getEntry } from "astro:content";
 
 const entry = (await getEntry("faq", "-index")) as CollectionEntry<"faq">;
 const { title, description, faqs } = entry.data;
+
+const { isLoggedIn } = Astro.locals;
+
+if (!isLoggedIn) {
+  return Astro.redirect("/login");
+}
 ---
 
 <Base title={title} description={description}>

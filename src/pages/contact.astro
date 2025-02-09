@@ -11,6 +11,12 @@ const entry = (await getEntry(
 )) as CollectionEntry<"contact">;
 const { contact_form_action } = config.params;
 const { title, description, info } = entry.data;
+
+const { isLoggedIn } = Astro.locals;
+
+if (!isLoggedIn) {
+  return Astro.redirect("/login");
+}
 ---
 
 <Base title={title} description={description}>
