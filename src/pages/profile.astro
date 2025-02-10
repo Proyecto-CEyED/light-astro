@@ -1,0 +1,37 @@
+---
+import ProfileCard from "@/components/ProfileCard.astro";
+import { firebase } from "@/firebase/config";
+import Base from "@/layouts/Base.astro";
+import {RecomendationsForm} from "@/components/RecomendationsForm.tsx";
+
+const firebaseUser = firebase.auth.currentUser;
+
+const { user, isLoggedIn } = Astro.locals;
+
+if (!isLoggedIn) {
+  return Astro.redirect("/login");
+}
+
+await firebaseUser?.reload();
+const { emailVerified } = firebaseUser!;
+const { avatar, email, name } = user;
+
+
+
+const title = "Personal Profile";
+const description = "Contact me for any queries or collaborations";
+---
+
+<Base title={title} description={description}>
+  <section class="section">
+    <div class="container">
+      <div
+        class="justify-center items-start font-sans bg-white fade-up grid sm:grid-cols-3 grid-cols-1 gap-6 mt-24"
+      >
+        <ProfileCard {email} {emailVerified} {name} {avatar} />
+
+        <RecomendationsForm client:load/>
+      </div>
+    </div>
+  </section>
+</Base>

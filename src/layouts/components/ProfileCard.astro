@@ -1,0 +1,101 @@
+---
+interface Props {
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  avatar?: string;
+}
+
+const { email, emailVerified, name, avatar } = Astro.props;
+---
+
+<div class="col-span-1 flex flex-col items-center justify-center mb-12">
+
+
+    <div class="card border bg-white mx-auto p-6 rounded-lg max-w-md ">
+
+        {
+          avatar ? (
+            <img
+              src={avatar}
+              alt="Foto de perfil"
+              class="w-32 mx-auto rounded-full -mt-24 border-8"
+            />
+          ) : (
+            <div class="w-32 h-32 mx-auto rounded-full -mt-20 border-8 border-white bg-primary flex justify-center items-center">
+              <span class="text-white text-3xl font-extrabold">
+                {name!.substring(0, 2)}
+              </span>
+            </div>
+          )
+        }
+      
+        <div class="text-center mt-6">
+          <h1 class="text-2xl font-bold text-primary">{name}</h1>
+          <p class="text-sm font-medium text-neutral-700">{email}</p>
+          <div class="flex items-center justify-center my-6">
+            <p class="text-sm font-medium text-neutral-500 mr-1">
+              {emailVerified ? "Correo verificado" : "Correo no verificado"}
+            </p>
+            {
+              emailVerified ? (
+                <svg
+                  class="w-5 h-5 text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  class="w-5 h-5 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )
+            }
+          </div>
+        </div>
+        <div class="px-6 mt-4 text-center text-sm text-neutral-700" id="description">
+          <!-- Areas de gustos -->
+          Diseño, Fotografía, Programación, Música, Deportes, Viajes
+        </div>
+        <hr class="mt-6 border-t-2 border-neutral-200" />
+        <div class="flex mt-6">
+          <div class="w-1/2 text-center">
+            <span class="font-bold text-lg text-primary"
+              ><div id="followers">12</div></span
+            >
+            <p class="text-sm text-neutral-600">Cursos Terminados</p>
+          </div>
+          <div class="w-px bg-neutral-300"></div>
+          <div class="w-1/2 text-center">
+            <span class="font-bold text-lg text-primary"
+              ><div id="following">20</div></span
+            >
+            <p class="text-sm text-neutral-600">Cursos Pendientes</p>
+          </div>
+        </div>
+      </div>      
+
+      <p class="text-gray-400 text-center mt-6">
+        Este es tu perfil de usuario, aquí puedes ver toda la información relacionada a tu cuenta.
+        No olvides mantener tus datos actualizados.
+      </p>
+</div>

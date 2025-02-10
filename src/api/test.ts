@@ -6,4 +6,7 @@ const testApi = axios.create({
   baseURL: API_ENDPOINT,
 });
 
-export { testApi };
+
+export {
+  testApi,
+}

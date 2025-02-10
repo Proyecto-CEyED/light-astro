@@ -1,4 +1,3 @@
-import { ReactNanoStore } from "@/components/ReactNanoStore";
 import { Provider } from "@/tankstack-query/Provider";
 import React, { memo } from "react";
 

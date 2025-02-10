@@ -13,16 +13,16 @@
       "url": "/pricing"
     },
     {
-      "name": "Contacto",
-      "url": "/contact"
-    },
-    {
       "name": "FAQ",
       "url": "/faq"
     },
     {
       "name": "DC",
       "url": "/elements"
+    },
+    {
+      "name": "Perfil",
+      "url": "/profile"
     }
   ],
   "footer": [

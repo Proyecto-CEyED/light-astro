@@ -1,7 +1,7 @@
 ---
-import { ReactNanoStore } from "@/components/ReactNanoStore";
 import { nav_button } from "@/config/config.json";
 import menu from "@/config/menu.json";
+import { firebase } from "@/firebase/config";
 
 const pathname = Astro.url.pathname;
 
@@ -18,9 +18,13 @@ export interface NavigationLink {
 }
 
 const { main }: { main: NavigationLink[] } = menu;
+
+const firebaseUser = firebase.auth.currentUser;
+const uid = firebaseUser?.uid;
 ---
 
 <header class="header">
+  
   <nav class="navbar container">
     <!-- logo -->
     <a href="/" class="order-0 flex items-center text-2xl gap-2">
@@ -114,9 +118,7 @@ const { main }: { main: NavigationLink[] } = menu;
     {
       nav_button.enable && (
         <div class="order-1 ml-auto hidden items-center md:order-2 md:ml-0 md:flex md:min-w-[150px] lg:min-w-[200px]">
-          <button
-            class="btn btn-primary z-0 ml-auto py-[14px] disabled:opacity-50 logout"
-          >
+          <button class="btn btn-primary z-0 ml-auto py-[14px] disabled:opacity-50 logout">
             {nav_button.label}
           </button>
         </div>
@@ -130,7 +132,9 @@ const { main }: { main: NavigationLink[] } = menu;
   import { actions } from "astro:actions";
 
   document.addEventListener("astro:page-load", () => {
-    const $$logoutButtons = document.querySelectorAll(".logout") as NodeListOf<HTMLButtonElement>;
+    const $$logoutButtons = document.querySelectorAll(
+      ".logout"
+    ) as NodeListOf<HTMLButtonElement>;
 
     $$logoutButtons.forEach(($logoutButton) => {
       $logoutButton.addEventListener("click", async () => {
@@ -140,6 +144,5 @@ const { main }: { main: NavigationLink[] } = menu;
         window.location.replace("/login");
       });
     });
-
   });
 </script>
